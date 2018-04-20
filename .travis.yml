@@ -16,15 +16,15 @@ before_install:
 
 env:
   matrix:
-    - TEST_OPTION="--stop-on-fail"
-    - TEST_OPTION="--process-isolation"
-    - TEST_OPTION="--testdox"
-    - TEST_OPTION="--dont-report-useless-tests"
-    - TEST_OPTION="--no-coverage"
+    - DOCKER_SERVICE=test1
+    - DOCKER_SERVICE=test2
+    - DOCKER_SERVICE=test3
+    - DOCKER_SERVICE=test4
+    - DOCKER_SERVICE=test5
 
 script:
   - cd docker
-  - docker-compose up -d
-  - docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && composer install --dev'
-  - docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && ls -al ./vendor/bin && ./vendor/bin/phpunit tests/Unit'
-  - docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && ./vendor/bin/phpcs --report-width=120 --standard=PSR1 tests/Unit'
+  - docker-compose up -d $DOCKER_SERVICE
+  - docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && composer install --dev'
+  - docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && ls -al ./vendor/bin && ./vendor/bin/phpunit tests/Unit'
+  - docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && ./vendor/bin/phpcs --report-width=120 --standard=PSR1 tests/Unit'
