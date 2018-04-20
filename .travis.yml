@@ -16,11 +16,7 @@ before_install:
 
 env:
   matrix:
-    - DOCKER_SERVICE=test1
-    - DOCKER_SERVICE=test2
-    - DOCKER_SERVICE=test3
-    - DOCKER_SERVICE=test4
-    - DOCKER_SERVICE=test5
+    - DOCKER_SERVICE=allinone
 
 script:
   - cd docker
