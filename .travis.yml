@@ -15,4 +15,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - ls -al
+  - cd docker && docker-compose up -d
+  - cd docker && docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && composer install --dev'
+  - cd docker && docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && ls -al ./vendor/bin && ./vendor/bin/phpunit tests/Unit'
