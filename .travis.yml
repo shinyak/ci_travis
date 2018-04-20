@@ -14,6 +14,14 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
+env:
+  matrix:
+    - TEST_OPTION="--stop-on-fail"
+    - TEST_OPTION="--process-isolation"
+    - TEST_OPTION="--testdox"
+    - TEST_OPTION="--dont-report-useless-tests"
+    - TEST_OPTION="--no-coverage"
+
 script:
   - cd docker
   - docker-compose up -d
