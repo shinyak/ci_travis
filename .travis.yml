@@ -19,10 +19,8 @@ env:
     - DOCKER_SERVICE=allinone
 
 script:
-  - echo $DOCKER_SERVICE
-  - "echo $DOCKER_SERVICE"
   - cd docker
-  - "docker-compose up -d $DOCKER_SERVICE"
-  - "docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && composer install --dev'"
-  - "docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && ls -al ./vendor/bin && ./vendor/bin/phpunit tests/Unit'"
-  - "docker-compose run $DOCKER_SERVICE /bin/bash -c 'cd /var/www/html/ci_travis && ./vendor/bin/phpcs --report-width=120 --standard=PSR1 tests/Unit'"
+  - "docker-compose up -d allinone"
+  - "docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && composer install --dev'"
+  - "docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && ls -al ./vendor/bin && ./vendor/bin/phpunit tests/Unit'"
+  - "docker-compose run allinone /bin/bash -c 'cd /var/www/html/ci_travis && ./vendor/bin/phpcs --report-width=120 --standard=PSR1 tests/Unit'"
